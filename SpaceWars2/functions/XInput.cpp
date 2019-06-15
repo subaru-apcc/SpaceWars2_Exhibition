@@ -1,6 +1,7 @@
 #include "XInput.hpp"
 
 #define BORDER 0.1
+#define FOUR_BUTTONS(num) XInput(num).buttonA|XInput(num).buttonB|XInput(num).buttonX|XInput(num).buttonY
 
 using asc::XInput;
 
@@ -49,8 +50,8 @@ void GamePad::SetAxis() {
 
 void GamePad::SetButton() {
 	// MainSkill
-	input.addButton(L"L_MainSkill", s3d::Input::KeyQ | XInput(0).buttonB);
-	input.addButton(L"R_MainSkill", s3d::Input::KeyI | s3d::Input::KeySlash | XInput(1).buttonB);
+	input.addButton(L"L_MainSkill", s3d::Input::KeyQ | FOUR_BUTTONS(0));
+	input.addButton(L"R_MainSkill", s3d::Input::KeyI | s3d::Input::KeySlash | FOUR_BUTTONS(1));
 
 	// SubSkill
 	input.addButton(L"L_SubSkill", s3d::Input::KeyE | XInput(0).buttonLB);
