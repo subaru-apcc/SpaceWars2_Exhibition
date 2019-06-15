@@ -20,7 +20,7 @@ void ControlGuidance::update() {
 		SoundAsset(L"move1").playMulti();
 	}
 	if (Data::KeyBack.repeat(20)) {
-		if (status != KEY) {
+		if (status != CONTROLLER) {
 			status = (ControlType)(status - 1);
 			SoundAsset(L"move1").setVolume(Config::MASTER_VOLUME * Config::CURSOR_VOLUME);
 			SoundAsset(L"move1").playMulti();
@@ -88,11 +88,6 @@ void ControlGuidance::draw() const {
 		break;
 	}
 	}
-
-	// 右下操作方法表示
-	Vec2 buttonPos(1190, 692);
-	buttonPos.x += (int)TextureAsset(L"buttonA_24").draw(buttonPos).w + 6;
-	buttonPos.x += (int)CicaR::Get(C12)(L"次へ").draw(buttonPos).w + 15;
 }
 
 

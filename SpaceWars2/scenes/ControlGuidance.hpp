@@ -8,7 +8,7 @@ enum ControlType {
 
 class ControlGuidance final : public SceneManager<String, CommonData>::Scene {
 private:
-	ControlType status = KEY;
+	ControlType status = CONTROLLER;
 
 	static void drawPointLine(Vec2 _root, Vec2 _pos, Color _color = Color(L"#fff"));
 
