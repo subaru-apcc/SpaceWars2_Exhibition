@@ -4,7 +4,7 @@
 
 namespace Config {
 	// version
-	const String VERSION	   = L"1.1_e";
+	const String VERSION	   = L"1.2_e";
 	const int	 VER_NUM	   = 19061511;
 
 	// タイトル
