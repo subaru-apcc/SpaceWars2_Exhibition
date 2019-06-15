@@ -52,7 +52,7 @@ void Title::update(){
 
 void Title::draw() const {
 	TextureAsset(L"background").resize(Window::Size()).draw();
-	TextureAsset(L"title-logo").drawAt(Window::Center().x, 150);
+	TextureAsset(L"title-logo").drawAt(Window::Center().x + 50, 150);
 
 	Circle(1180, 1080, 760).drawFrame(5, 5, Color(L"#00bfff"));
 
