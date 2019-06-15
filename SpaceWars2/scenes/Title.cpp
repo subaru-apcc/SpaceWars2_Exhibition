@@ -12,12 +12,12 @@ void Title::init() {
 void Title::update(){
 	changeScene(Debug::InputFnKey(), 100);
 
-	if (Data::KeyUp.repeat(20, true) && selecting > 0) {
+	if (Data::KeySelectUp.repeat(20, true) && selecting > 0) {
 		--selecting;
 		SoundAsset(L"cursor1").setVolume(Config::MASTER_VOLUME * Config::CURSOR_VOLUME);
 		SoundAsset(L"cursor1").playMulti();
 	}
-	if (Data::KeyDown.repeat(20, true) && selecting < 1) {
+	if (Data::KeySelectDown.repeat(20, true) && selecting < 1) {
 		++selecting;
 		SoundAsset(L"cursor1").setVolume(Config::MASTER_VOLUME * Config::CURSOR_VOLUME);
 		SoundAsset(L"cursor1").playMulti();
@@ -69,11 +69,4 @@ void Title::draw() const {
 
 	Rect(0, 690, 220, 30).draw(ColorF(L"#000").setAlpha(0.5));
 	CicaR::Get(C12)(Config::VERSION, L" / ", Config::VER_NUM).draw({ 10, 695 });
-
-	Vec2 buttonPos(1165, 692);
-
-	buttonPos.x += (int)TextureAsset(L"cross_24").draw(buttonPos, Alpha(200)).w + 5;
-	buttonPos.x += (int)TextureAsset(L"stick_24").draw(buttonPos, Alpha(200)).w + 10;
-	buttonPos.x += (int)CicaR::Get(C12)(L"/").draw(buttonPos, Alpha(200)).w + 10;
-	buttonPos.x += (int)TextureAsset(L"buttonA_24").draw(buttonPos, Alpha(200)).w + 6;
 }
