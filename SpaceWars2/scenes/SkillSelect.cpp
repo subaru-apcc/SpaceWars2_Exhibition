@@ -34,6 +34,16 @@ void SkillSelect::init() {
 	Data::LPlayer.init(Vec2(140, Config::HEIGHT / 2), true);  //円の半径
 	Data::RPlayer.init(Vec2(1100, Config::HEIGHT / 2), false); //WIDTH-円の半径
 
+	// Skill説明文の初期化
+	for(int isLeft=0; isLeft<2; isLeft++) {
+		Player* PLAYER = &(isLeft ? Data::LPlayer : Data::RPlayer);
+		goingToBlackOut[isLeft] = false;
+		skillsDisplayed[isLeft][0] = PLAYER->whatMainSkill;
+		skillsDisplayed[isLeft][1] = PLAYER->whatSubSkill;
+		skillsDisplayed[isLeft][2] = PLAYER->whatSpecialSkill;
+		skillTypeDisplayed[isLeft] = PLAYER->selectedType;
+	}
+
 	// Dataの読み込み
 	if (!isLoaded) {
 		for (auto i : step(7)) {
