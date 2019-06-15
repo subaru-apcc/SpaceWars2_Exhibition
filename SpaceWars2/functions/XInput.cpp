@@ -23,27 +23,27 @@ void GamePad::SetAxis() {
 	// Left
 	input.addAxis(L"L_CtrlX",
 		asc::Axis(Input::KeyD, Input::KeyA) 
-		| asc::Axis(asc::Axis(LGamePad, asc::XInputAxis::LeftThumbX)) 
-		| asc::Axis(asc::Axis(LGamePad, asc::XInputAxis::RightThumbX))
+		| asc::Axis(LGamePad, asc::XInputAxis::LeftThumbX) 
+		| asc::Axis(LGamePad, asc::XInputAxis::RightThumbX)
 	);
 	input.addAxis(L"L_CtrlY", 
 		asc::Axis(Input::KeyW, Input::KeyS) 
-		| asc::Axis(asc::Axis(LGamePad, asc::XInputAxis::LeftThumbY)) 
-		| asc::Axis(asc::Axis(LGamePad, asc::XInputAxis::RightThumbY))
+		| asc::Axis(LGamePad, asc::XInputAxis::LeftThumbY) 
+		| asc::Axis(LGamePad, asc::XInputAxis::RightThumbY)
 	);
 
 	// Right
 	input.addAxis(L"R_CtrlX", 
 		asc::Axis(Input::KeySemicolon, Input::KeyK)
 		| asc::Axis(Input::KeyRight, Input::KeyLeft)
-		| asc::Axis(asc::Axis(RGamePad, asc::XInputAxis::LeftThumbX)) 
-		| asc::Axis(asc::Axis(RGamePad, asc::XInputAxis::RightThumbX))
+		| asc::Axis(RGamePad, asc::XInputAxis::LeftThumbX) 
+		| asc::Axis(RGamePad, asc::XInputAxis::RightThumbX)
 	);
 	input.addAxis(L"R_CtrlY", 
 		asc::Axis(Input::KeyO, Input::KeyL)
 		| asc::Axis(Input::KeyUp, Input::KeyDown)
-		| asc::Axis(asc::Axis(RGamePad, asc::XInputAxis::LeftThumbY)) 
-		| asc::Axis(asc::Axis(RGamePad, asc::XInputAxis::RightThumbY))
+		| asc::Axis(RGamePad, asc::XInputAxis::LeftThumbY) 
+		| asc::Axis(RGamePad, asc::XInputAxis::RightThumbY)
 	);
 }
 
