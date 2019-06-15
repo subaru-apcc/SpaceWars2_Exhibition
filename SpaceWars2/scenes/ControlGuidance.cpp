@@ -20,7 +20,7 @@ void ControlGuidance::update() {
 		SoundAsset(L"move1").playMulti();
 	}
 	if (Data::KeyBack.repeat(20)) {
-		if (status != KEY) {
+		if (status != CONTROLLER) {
 			status = (ControlType)(status - 1);
 			SoundAsset(L"move1").setVolume(Config::MASTER_VOLUME * Config::CURSOR_VOLUME);
 			SoundAsset(L"move1").playMulti();
