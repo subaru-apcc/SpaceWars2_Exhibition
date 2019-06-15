@@ -134,6 +134,12 @@ bool GamePad::Key(bool _isLeft, const String& _name) {
 			|| XInput((int)!_isLeft).rightTrigger > 0.5 
 			|| s3d::Input::KeyBackspace.pressed;
 
+	if (_name == L"SubSkill")
+		return input.button(lr + L"_SubSkill").pressed || XInput((int)!_isLeft).leftTrigger > 0.8;
+
+	if (_name == L"SpecialSkill")
+		return input.button(lr + L"_SpecialSkill").pressed || XInput((int)!_isLeft).rightTrigger > 0.8;
+
 	return input.button(lr + L"_" + _name).pressed;
 }
 
