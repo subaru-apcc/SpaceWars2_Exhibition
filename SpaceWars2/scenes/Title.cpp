@@ -17,7 +17,7 @@ void Title::update(){
 		SoundAsset(L"cursor1").setVolume(Config::MASTER_VOLUME * Config::CURSOR_VOLUME);
 		SoundAsset(L"cursor1").playMulti();
 	}
-	if (Data::KeyDown.repeat(20, true) && selecting < 3) {
+	if (Data::KeyDown.repeat(20, true) && selecting < 1) {
 		++selecting;
 		SoundAsset(L"cursor1").setVolume(Config::MASTER_VOLUME * Config::CURSOR_VOLUME);
 		SoundAsset(L"cursor1").playMulti();
@@ -50,16 +50,21 @@ void Title::update(){
 
 }
 
-void Title::draw() const{
+void Title::draw() const {
 	TextureAsset(L"background").resize(Window::Size()).draw();
 	TextureAsset(L"title-logo").drawAt(Window::Center().x, 150);
 
 	Circle(1180, 1080, 760).drawFrame(5, 5, Color(L"#00bfff"));
 
 	const String name[4] = { L"START", L"GAME", L"LICENSE", L"EXIT" };
-	for (auto i : step(4)) {
+	for (auto i : step(2)) {
 		TextureAsset(i == selecting ? L"title-button" : L"title-button-hidden").draw(950, 400 + 70 * i);
-		SmartUI::Get(S28)(name[i]).draw({ 980, 398 + 70 * i }, (i == selecting ? Color(L"#fff") : Color(L"#ccc")));
+		SmartUI::Get(S28)(name[i]).draw({ 980, 398 + 70 * i }, i == selecting ? ColorF(L"#fff") : ColorF(L"#ccc"));
+	}
+
+	for (int i = 2; i < 4; i++) {
+		TextureAsset(L"title-button-hidden").draw(950, 400 + 70 * i, ColorF(L"#fff").setAlpha(0.4));
+		SmartUI::Get(S28)(name[i]).draw({ 980, 398 + 70 * i }, ColorF(L"#ccc").setAlpha(0.4));
 	}
 
 	Rect(0, 690, 220, 30).draw(ColorF(L"#000").setAlpha(0.5));

@@ -147,7 +147,7 @@ void Game::update() {
 				--selecting;
 			else
 				sound = false;
-			selecting = Clamp(selecting, 0, 2);
+			selecting = Clamp(selecting, 0, 1);
 			if (sound) {
 				SoundAsset(L"cursor1").setVolume(Config::MASTER_VOLUME * Config::CURSOR_VOLUME);
 				SoundAsset(L"cursor1").playMulti();
@@ -158,10 +158,10 @@ void Game::update() {
 				SoundAsset(L"click2").playMulti();
 				switch (selecting) {
 				case 0:
-					changeScene(L"SkillSelect", 500);
+					changeScene(L"Title", 500);
 					break;
 				case 1:
-					changeScene(L"Title", 500);
+					changeScene(L"SkillSelect", 500);
 					break;
 				case 2:
 					System::Exit();
@@ -319,9 +319,9 @@ void Game::draw() const {
 			// 装飾
 			Line(250, hy - 10, 250, ty + 70).draw(6, ColorF(L"#00BFFF"));
 
-			const String text[3] = { L"RESTART", L"TITLE", L"EXIT" };
+			const String text[3] = { L"TITLE", L"RESTART", L"EXIT"};
 			for (auto i : step(3)) {
-				SmartUI::Get(S28)(text[i]).draw(Arg::leftCenter, { 280, 540 + 65 * i });
+				SmartUI::Get(S28)(text[i]).draw(Arg::leftCenter, { 280, 540 + 65 * i }, ColorF(L"#fff").setAlpha(i<2 ? 1 : 0.4));
 				if (i == selecting) {
 					Geometry2D::CreateNgon(3, 13, 90_deg, { 245, 540 + selecting * 65 }).draw();
 				}
