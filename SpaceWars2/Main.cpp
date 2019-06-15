@@ -23,6 +23,7 @@ void Main() {
 	TextureAsset::Register(L"title-button", L"/7110");
 	TextureAsset::Register(L"title-button-hidden", L"/7111");
 	TextureAsset::Register(L"license"     , L"/7200");
+	TextureAsset::Register(L"license-s"   , L"/7201");
 	TextureAsset::Register(L"buttonA_24"  , L"/7800");
 	TextureAsset::Register(L"buttonB_24"  , L"/7801");
 	// TextureAsset::Register(L"buttonX_24"  , L"/7802");
