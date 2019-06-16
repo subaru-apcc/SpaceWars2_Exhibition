@@ -547,10 +547,10 @@ void SkillSelect::draw() const {
 		TextureAsset(L"ready").drawAt(Window::Center().x * 1.5, Window::Center().y);
 	}
 
-	if (!LReady && !RReady) {
+	if (!LReady)
 		Letters::Get(L18)(60 - timeLimit.s()).draw(Arg::topRight, { Window::Center().x - 45, 20 }, HSV(60 - timeLimit.s(), 0.64, 1));
+	if (!RReady)
 		Letters::Get(L18)(60 - timeLimit.s()).draw(Arg::topRight, { Window::Size().x - 45, 20 }, HSV(60 - timeLimit.s(), 0.64, 1));
-	}
 
 	Vec2 buttonPos(820, 692);
 
