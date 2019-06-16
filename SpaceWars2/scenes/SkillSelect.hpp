@@ -38,6 +38,8 @@ private:
 	int judgmentTime[2] = {};
 	int playerHP[2] = {};
 	int timerCount[2] = {};
+	Stopwatch timeLimit;
+
 	Vec2 shrinkVec2(Vec2, int) const;
 	void drawHPGauge(bool _isLeft, int HP) const;
 
