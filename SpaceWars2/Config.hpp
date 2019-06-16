@@ -4,8 +4,8 @@
 
 namespace Config {
 	// version
-	const String VERSION	   = L"1.2_e";
-	const int	 VER_NUM	   = 19061511;
+	const String VERSION	   = L"1.3_e";
+	const int	 VER_NUM	   = 19061611;
 
 	// タイトル
 	const String TITLE		   = L"SpaceWars 2";
