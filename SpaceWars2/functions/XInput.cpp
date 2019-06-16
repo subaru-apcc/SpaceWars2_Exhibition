@@ -1,6 +1,7 @@
 #include "XInput.hpp"
 
 #define BORDER 0.1
+#define FOUR_BUTTONS(num) XInput(num).buttonA|XInput(num).buttonB|XInput(num).buttonX|XInput(num).buttonY
 
 using asc::XInput;
 
@@ -23,34 +24,34 @@ void GamePad::SetAxis() {
 	// Left
 	input.addAxis(L"L_CtrlX",
 		asc::Axis(Input::KeyD, Input::KeyA) 
-		| asc::Axis(asc::Axis(LGamePad, asc::XInputAxis::LeftThumbX)) 
-		| asc::Axis(asc::Axis(LGamePad, asc::XInputAxis::RightThumbX))
+		| asc::Axis(LGamePad, asc::XInputAxis::LeftThumbX) 
+		| asc::Axis(LGamePad, asc::XInputAxis::RightThumbX)
 	);
 	input.addAxis(L"L_CtrlY", 
 		asc::Axis(Input::KeyW, Input::KeyS) 
-		| asc::Axis(asc::Axis(LGamePad, asc::XInputAxis::LeftThumbY)) 
-		| asc::Axis(asc::Axis(LGamePad, asc::XInputAxis::RightThumbY))
+		| asc::Axis(LGamePad, asc::XInputAxis::LeftThumbY) 
+		| asc::Axis(LGamePad, asc::XInputAxis::RightThumbY)
 	);
 
 	// Right
 	input.addAxis(L"R_CtrlX", 
 		asc::Axis(Input::KeySemicolon, Input::KeyK)
 		| asc::Axis(Input::KeyRight, Input::KeyLeft)
-		| asc::Axis(asc::Axis(RGamePad, asc::XInputAxis::LeftThumbX)) 
-		| asc::Axis(asc::Axis(RGamePad, asc::XInputAxis::RightThumbX))
+		| asc::Axis(RGamePad, asc::XInputAxis::LeftThumbX) 
+		| asc::Axis(RGamePad, asc::XInputAxis::RightThumbX)
 	);
 	input.addAxis(L"R_CtrlY", 
 		asc::Axis(Input::KeyO, Input::KeyL)
 		| asc::Axis(Input::KeyUp, Input::KeyDown)
-		| asc::Axis(asc::Axis(RGamePad, asc::XInputAxis::LeftThumbY)) 
-		| asc::Axis(asc::Axis(RGamePad, asc::XInputAxis::RightThumbY))
+		| asc::Axis(RGamePad, asc::XInputAxis::LeftThumbY) 
+		| asc::Axis(RGamePad, asc::XInputAxis::RightThumbY)
 	);
 }
 
 void GamePad::SetButton() {
 	// MainSkill
-	input.addButton(L"L_MainSkill", s3d::Input::KeyQ | XInput(0).buttonB);
-	input.addButton(L"R_MainSkill", s3d::Input::KeyI | s3d::Input::KeySlash | XInput(1).buttonB);
+	input.addButton(L"L_MainSkill", s3d::Input::KeyQ | FOUR_BUTTONS(0));
+	input.addButton(L"R_MainSkill", s3d::Input::KeyI | s3d::Input::KeySlash | FOUR_BUTTONS(1));
 
 	// SubSkill
 	input.addButton(L"L_SubSkill", s3d::Input::KeyE | XInput(0).buttonLB);
@@ -80,8 +81,8 @@ void GamePad::SetButton() {
 	input.addButton(L"KeyEnter",    s3d::Input::KeyEnter    | s3d::Input::KeyEnter);
 	input.addButton(L"L_KeyBack",   s3d::Input::KeyLControl | s3d::Input::KeyBackspace);
 	input.addButton(L"R_KeyBack",   s3d::Input::KeyRControl | s3d::Input::KeyBackspace);
-	input.addButton(L"L_KeySelect", s3d::Input::KeyLShift   | XInput(0).buttonA);
-	input.addButton(L"R_KeySelect", s3d::Input::KeyRShift   | XInput(1).buttonA);
+	input.addButton(L"L_KeySelect", s3d::Input::KeyLShift   | FOUR_BUTTONS(0));
+	input.addButton(L"R_KeySelect", s3d::Input::KeyRShift   | FOUR_BUTTONS(1));
 	input.addButton(L"L_KeyCancel", s3d::Input::KeyLControl | s3d::Input::KeyEnd | XInput(0).buttonB);
 	input.addButton(L"R_KeyCancel", s3d::Input::KeyRControl | s3d::Input::KeyEnd | XInput(1).buttonB);
 }
@@ -132,6 +133,12 @@ bool GamePad::Key(bool _isLeft, const String& _name) {
 			|| XInput((int)!_isLeft). leftTrigger > 0.5 
 			|| XInput((int)!_isLeft).rightTrigger > 0.5 
 			|| s3d::Input::KeyBackspace.pressed;
+
+	if (_name == L"SubSkill")
+		return input.button(lr + L"_SubSkill").pressed || XInput((int)!_isLeft).leftTrigger > 0.8;
+
+	if (_name == L"SpecialSkill")
+		return input.button(lr + L"_SpecialSkill").pressed || XInput((int)!_isLeft).rightTrigger > 0.8;
 
 	return input.button(lr + L"_" + _name).pressed;
 }
