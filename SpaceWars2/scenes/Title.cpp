@@ -69,6 +69,6 @@ void Title::draw() const {
 
 	TextureAsset(L"license-s").draw(0, 260);
 
-	Rect(0, 690, 220, 30).draw(ColorF(L"#000").setAlpha(0.5));
+	Rect(0, 690, 240, 30).draw(ColorF(L"#000").setAlpha(0.5));
 	CicaR::Get(C12)(Config::VERSION, L" / ", Config::VER_NUM).draw({ 10, 695 });
 }
