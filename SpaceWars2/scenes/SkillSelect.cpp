@@ -99,6 +99,8 @@ void SkillSelect::init() {
 		SmartUI::Get(S12).overwrite(img[i], strings[i], { 0, 0 }, Color(L"#fff"));
 		rotatedDescription[i] = Texture(img[i]);
 	}
+
+	timeLimit.start();
 }
 
 void SkillSelect::update() {
@@ -110,12 +112,12 @@ void SkillSelect::update() {
 	if (LReady && RReady) ++nextStageTime;
 	else nextStageTime = 0;
 
-	if (Data::LPlayer.selectedType == 2 && !LReady && Data::LKeySelect.repeat(20, true)) {
+	if (!LReady && ((Data::LPlayer.selectedType == 2 && Data::LKeySelect.repeat(20, true)) || timeLimit.s() >= 60)) {
 		LReady = true;
 		SoundAsset(L"click1").setVolume(Config::MASTER_VOLUME * Config::CURSOR_VOLUME);
 		SoundAsset(L"click1").playMulti();
 	}
-	if (Data::RPlayer.selectedType == 2 && !RReady && Data::RKeySelect.repeat(20, true)) {
+	if (!RReady && ((Data::RPlayer.selectedType == 2 && Data::RKeySelect.repeat(20, true)) || timeLimit.s() >= 60)) {
 		RReady = true;
 		SoundAsset(L"click1").setVolume(Config::MASTER_VOLUME * Config::CURSOR_VOLUME);
 		SoundAsset(L"click1").playMulti();
@@ -543,6 +545,11 @@ void SkillSelect::draw() const {
 		Rect(Window::Center().x, 0, Window::Center().x, Config::HEIGHT)
 			.draw(ColorF(L"#00f").setAlpha(0.1));
 		TextureAsset(L"ready").drawAt(Window::Center().x * 1.5, Window::Center().y);
+	}
+
+	if (!LReady && !RReady) {
+		Letters::Get(L18)(60 - timeLimit.s()).draw(Arg::topRight, { Window::Center().x - 45, 20 }, HSV(60 - timeLimit.s(), 0.64, 1));
+		Letters::Get(L18)(60 - timeLimit.s()).draw(Arg::topRight, { Window::Size().x - 45, 20 }, HSV(60 - timeLimit.s(), 0.64, 1));
 	}
 
 	Vec2 buttonPos(820, 692);
